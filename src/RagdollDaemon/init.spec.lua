@@ -134,6 +134,6 @@ return function()
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
             expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
             rig:Destroy()
-        end)
+        end) -- These tests don't work in CI for some reason. They work everywhere else.
     end)
 end
