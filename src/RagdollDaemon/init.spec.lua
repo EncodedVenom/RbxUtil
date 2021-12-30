@@ -109,7 +109,10 @@ return function()
 
             CollectionService:AddTag(rig.Humanoid, "RagdollOnDeath")
 
+			task.wait()
             rig.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+			rig.HumanoidRootPart.Anchored = false
+			task.wait()
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
             expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
@@ -121,7 +124,10 @@ return function()
 
             local rig = BuildR15Rig()
 
+            task.wait()
             rig.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+			rig.HumanoidRootPart.Anchored = false
+			task.wait()
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
             expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
