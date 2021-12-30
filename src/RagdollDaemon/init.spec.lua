@@ -109,8 +109,7 @@ return function()
 
             CollectionService:AddTag(rig.Humanoid, "RagdollOnDeath")
 
-            task.wait(1)
-            rig.Humanoid.Health = 0
+            rig.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
             expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
@@ -122,8 +121,7 @@ return function()
 
             local rig = BuildR15Rig()
 
-            task.wait(1)
-            rig.Humanoid.Health = 0
+            rig.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
             expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
