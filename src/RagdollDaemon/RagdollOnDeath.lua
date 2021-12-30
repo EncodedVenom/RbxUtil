@@ -1,6 +1,6 @@
 local Players = game:GetService("Players")
 local CollectionService = game:GetService("CollectionService")
-local Component = require(game:GetService("ReplicatedStorage").Packages.Component)
+local Component = require(script.Parent.Parent.Component)
 
 local RagdollOnDeath = Component.new({
     Tag = "RagdollOnDeath"

@@ -8,9 +8,9 @@
 local Players = game:GetService("Players")
 local CollectionService = game:GetService("CollectionService")
 
-local PlayerDeathRagdoll = require(script.PlayerDeathRagdoll)
-local Ragdoll = require(script.Ragdoll)
-local RagdollOnDeath = require(script.RagdollOnDeath)
+require(script.PlayerDeathRagdoll)
+require(script.Ragdoll)
+require(script.RagdollOnDeath)
 
 local HelperFunctions = {}
 

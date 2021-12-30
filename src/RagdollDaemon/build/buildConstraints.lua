@@ -133,7 +133,8 @@ local function createConstraint(jointData)
 	-- so when we enter ragdoll we need to turn off the joint, and turn it back on
 	-- when we leave ragdoll. This allows us to tell which joint corresponds with
 	-- which constraint
-	local rigidPointer = Instance.new("ObjectValue", constraint)
+	local rigidPointer = Instance.new("ObjectValue")
+	rigidPointer.Parent = constraint
 	rigidPointer.Name = "RigidJoint"
 	rigidPointer.Value = jointData.Joint
 	
@@ -144,7 +145,7 @@ return function(attachmentMap)
 	local ragdollConstraints = Instance.new("Folder")
 	ragdollConstraints.Name = "RagdollConstraints"
 
-	for attachmentName,jointData in pairs(attachmentMap) do
+	for _,jointData in pairs(attachmentMap) do
 		if jointData.Joint.Name ~= "Root" then
 			local ragdollConstraint = createConstraint(jointData)
 			ragdollConstraint.Parent = ragdollConstraints

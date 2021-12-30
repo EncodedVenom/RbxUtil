@@ -1,7 +1,7 @@
 local Players = game:GetService("Players")
 
 local IS_SERVER = game:GetService("RunService"):IsServer()
-local Component = require(game:GetService("ReplicatedStorage").Packages.Component)
+local Component = require(script.Parent.Parent.Component)
 local build = require(script.Parent.build)
 
 local Ragdoll = Component.new({
@@ -34,9 +34,7 @@ end
 
 function Ragdoll:Start()
     local Player = Players:GetPlayerFromCharacter(self.Instance.Parent)
-    if Player and self.Instance.Health > 0 and (not IS_SERVER) then
-        self.Instance:ChangeState(Enum.HumanoidStateType.Physics)
-    elseif (not Player) and IS_SERVER then
+    if (Player and self.Instance.Health > 0 and (not IS_SERVER)) or ((not Player) and IS_SERVER) then
         self.Instance:ChangeState(Enum.HumanoidStateType.Physics)
     end
     setStateEnabled(self.Instance, true)
@@ -47,9 +45,7 @@ function Ragdoll:Stop()
         return
     end
     local Player = Players:GetPlayerFromCharacter(self.Instance.Parent)
-    if Player and self.Instance.Health > 0 and (not IS_SERVER) then
-        self.Instance:ChangeState(Enum.HumanoidStateType.GettingUp)
-    elseif (not Player) and IS_SERVER then
+    if (Player and self.Instance.Health > 0 and (not IS_SERVER)) or ((not Player) and IS_SERVER) then
         self.Instance:ChangeState(Enum.HumanoidStateType.GettingUp)
     end
     if self.Instance then -- Character might not exist anymore. It could have been yeeted out of existence for all I know.
