@@ -108,6 +108,8 @@ return function()
             local rig = BuildR15Rig()
 
             CollectionService:AddTag(rig.Humanoid, "RagdollOnDeath")
+
+            task.wait(1)
             rig.Humanoid.Health = 0
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
@@ -120,6 +122,7 @@ return function()
 
             local rig = BuildR15Rig()
 
+            task.wait(1)
             rig.Humanoid.Health = 0
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
