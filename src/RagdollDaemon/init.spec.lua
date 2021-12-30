@@ -24,8 +24,9 @@ local function r15RigImported(rig)
 	local r15Head = rig:WaitForChild("Head", 1)
 
 	local existingFace = r15Head:FindFirstChild("face") or r15Head:FindFirstChild("Face")
-	if not game:GetFastFlag("RigBuilderNoTwoFace") or existingFace == nil then
-		local face = Instance.new("Decal", r15Head)
+	if existingFace == nil then
+		local face = Instance.new("Decal")
+        face.Parent = r15Head
 		face.Name = "face"
 		face.Texture = "rbxasset://textures/face.png"
 	end
@@ -34,7 +35,8 @@ local function r15RigImported(rig)
 end
 
 local function BuildR15Rig(package)
-	local m = Instance.new("Model", workspace)
+	local m = Instance.new("Model")
+    m.Parent = workspace
 	local headMesh = nil
 	local face = nil
 	if package ~= nil then
@@ -85,9 +87,6 @@ end
 return function()
 
     local RagdollDaemon = require(script.Parent)
-    local RagdollComponent = require(script.Parent.Ragdoll)
-    local RagdollOnDeath = require(script.Parent.RagdollOnDeath)
-    -- No easy way to test PlayerDeathRagdoll, so I'm ignoring it.
 
     describe("Ragdoll", function()
         it("should be able to build", function()
@@ -102,6 +101,7 @@ return function()
             CollectionService:AddTag(rig.Humanoid, "Ragdoll")
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
+            rig:Destroy()
         end)
 
         it("should be able to respond to death", function()
@@ -112,6 +112,19 @@ return function()
 
             expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
             expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
+            rig:Destroy()
+        end)
+
+        it("should work when NPC ragdolls are set to occur", function()
+            RagdollDaemon.MakeNonPlayerCharactersRagdollOnDeath()
+
+            local rig = BuildR15Rig()
+
+            rig.Humanoid.Health = 0
+
+            expect(rig:WaitForChild("RagdollConstraints", 1)).to.be.ok()
+            expect(CollectionService:HasTag(rig.Humanoid, "Ragdoll")).to.equal(true)
+            rig:Destroy()
         end)
     end)
 end
