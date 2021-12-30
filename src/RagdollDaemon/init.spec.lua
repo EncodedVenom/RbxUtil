@@ -111,6 +111,7 @@ return function()
 
 			task.wait()
             rig.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+			rig.Humanoid.Health = 0
 			rig.HumanoidRootPart.Anchored = false
 			task.wait()
 
@@ -126,6 +127,7 @@ return function()
 
             task.wait()
             rig.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+			rig.Humanoid.Health = 0
 			rig.HumanoidRootPart.Anchored = false
 			task.wait()
 
